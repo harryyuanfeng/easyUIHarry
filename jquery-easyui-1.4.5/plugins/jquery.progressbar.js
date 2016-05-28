@@ -9,6 +9,7 @@
  */
 (function($){
 function _1(_2){
+    debugger
 $(_2).addClass("progressbar");
 $(_2).html("<div class=\"progressbar-text\"></div><div class=\"progressbar-value\"><div class=\"progressbar-text\"></div></div>");
 $(_2).bind("_resize",function(e,_3){

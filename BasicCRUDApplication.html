@@ -47,6 +47,20 @@
     </thead>
 </table>
 
+<table id="leancloudA" style="width:500px;height:400px"
+       title="DataGrid - CardView" singleSelect="true" fitColumns="true" remoteSort="false"
+       url="http://localhost:3000/customdataGrid" pagination="true" sortOrder="desc" sortName="itemid">
+    <thead>
+    <tr>
+        <th field="itemid" width="80" sortable="true">Item ID</th>
+        <th field="listprice" width="80" sortable="true">List Price</th>
+        <th field="unitcost" width="80" sortable="true">Unit Cost</th>
+        <th field="attr1" width="150" sortable="true">Attribute</th>
+        <th field="status" width="60" sortable="true">Status</th>
+    </tr>
+    </thead>
+</table>
+
 <div id="toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
@@ -112,8 +126,12 @@
         }
     });
 
-    $('#tt').datagrid({
-        view: cardview
+//    $('#tt').datagrid({
+//        view: cardview
+//    });
+
+    $('#leancloudA').datagrid({
+        view: leancloudA
     });
 
 

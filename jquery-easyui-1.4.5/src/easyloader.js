@@ -26,7 +26,7 @@
 			js:'jquery.linkbutton.js',
 			css:'linkbutton.css'
 		},
-		progressbar:{
+		progressbarharry:{
 			js:'jquery.progressbar.js',
 			css:'progressbar.css'
 		},

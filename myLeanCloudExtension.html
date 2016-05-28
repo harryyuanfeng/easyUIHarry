@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="extension/leancloudDatagrid.js"></script>
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+
+</head>
+<body>
+<h2>Basic CRUD Application</h2>
+<p>Click the buttons on datagrid toolbar to do crud actions.</p>
+
+<table style="width:700px;height:250px" toolbar="#toolbar" pagination="true"
+       rownumbers="true" fitColumns="true" singleSelect="true" id="dgharry"></table>
+    <thead>
+    <tr>
+        <th data-options="field:'age',width:100">Code</th>
+        <th data-options="field:'name',width:100">Name</th>
+        <th data-options="field:'note',width:100,align:'right'">Price</th>
+    </tr>
+    </thead>
+</table>
+
+
+<script type="text/javascript">
+    AV.initialize('OAsq3BaUejlty6HR5y6LtoOA-gzGzoHsz', 'rY459mImPgBLwM4H78n3lbzI');
+//    $('#dgharry').datagrid({
+//        view:leancloudA
+//    });
+
+//    $('#dgharry').datagrid({
+//        data: []
+//    });
+//    $('#dgharry').datagrid('appendRow',{
+//        name: 'new name',
+//        age: 30,
+//        note: 'some messages'
+//    });
+//
+//    $('#dgharry').datagrid('appendRow',{
+//        name: 'new name',
+//        age: 30,
+//        note: 'some messages'
+//    });
+//    $('#dgharry').datagrid('appendRow',{
+//        name: 'new name',
+//        age: 30,
+//        note: 'some messages'
+//    });
+        $('#dgharry').datagrid({
+            columns:[
+                {field:'itemid',title:'Item ID',rowspan:2,width:80,sortable:true},
+                {field:'productid',title:'Product ID',rowspan:2,width:80,sortable:true},
+                {title:'Item Details',colspan:4}
+            ]
+        });
+
+
+//    $('#dgharry').datagrid({
+//        data: [
+//            {code:'1', name:'value12'},
+//            {code:'2', name:'value22'},
+//            {code:'3', name:'value12'},
+//            {code:'value21', name:'value22'},
+//            {code:'4', name:'value12'},
+//            {code:'value21', name:'value22'},{code:'value11', name:'value12'},
+//            {code:'5', name:'value22'},{code:'value11', name:'value12'},
+//            {code:'value21', name:'value22'},{code:'value11', name:'value12'},
+//            {code:'6', name:'value22'},{code:'value11', name:'value12'},
+//            {code:'value21', name:'value22'},{code:'value11', name:'value12'},
+//            {code:'7', name:'value22'},{code:'value11', name:'value12'},
+//            {code:'value21', name:'value22'},
+//        ],
+//        columns:[[
+//            {field:'code',title:'Code',width:100},
+//            {field:'name',title:'Name',width:100}
+//        ]]
+//    });
+
+</script>
+<style type="text/css">
+    #fm{
+        margin:0;
+        padding:10px 30px;
+    }
+    .ftitle{
+        font-size:14px;
+        font-weight:bold;
+        padding:5px 0;
+        margin-bottom:10px;
+        border-bottom:1px solid #ccc;
+    }
+    .fitem{
+        margin-bottom:5px;
+    }
+    .fitem label{
+        display:inline-block;
+        width:80px;
+    }
+    .fitem input{
+        width:160px;
+    }
+</style>
+</body>
+</html>
