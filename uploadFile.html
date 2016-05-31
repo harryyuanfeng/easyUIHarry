@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="extension/leancloudDatagrid.js"></script>
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+
+</head>
+<body>
+
+<div class="margins">
+    <input id="xyqNewsThumImage" class="easyui-filebox" data-options="prompt:'首页图片'" style="width:300px">
+</div>
+
+
+<div class="margins">
+    <a id="xyqNewsSavebtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a>
+</div>
+
+<script type="text/javascript">
+    AV.initialize('OAsq3BaUejlty6HR5y6LtoOA-gzGzoHsz', 'rY459mImPgBLwM4H78n3lbzI');
+    function uploadFileById(id,callback){
+        var fileUploadControl = $(id)[0];
+        if (fileUploadControl.files.length > 0) {
+            var file = fileUploadControl.files[0];
+            var name = 'avatar.jpg';
+            var avFile = new AV.File(name, file);
+            avFile.save().then(function(obj) {
+                // 数据保存成功
+                $('#p').progressbar({
+                    value: 100
+                });
+                if(callback){
+                    callback(obj);
+                }
+
+            }, function(err) {
+                // 数据保存失败
+                console.log(err);
+            });
+        }
+    }
+    $('#xyqNewsSavebtn').click(function(){
+        uploadFileById('#filebox_file_id_1',function(obj){
+            console.log(obj.url());
+        })
+    });
+</script>
+
+</body>
+</html>

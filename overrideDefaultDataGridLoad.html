@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="extension/leancloudDatagrid.js"></script>
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+
+</head>
+<body>
+
+<table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
+       toolbar="#toolbar" pagination="true" data-options="
+				url:'https://api.leancloud.cn/1.1/classes/xyqClass',
+				method:'get',
+				showGroup:true,
+				scrollbarSize:0
+			"
+       rownumbers="true" fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="program" width="50">object ID</th>
+        <th field="students" width="50">students</th>
+        <th field="name" width="50">email</th>
+        <th field="containInTest" width="50">email</th>
+    </tr>
+    </thead>
+</table>
+
+<script type="text/javascript">
+
+    $.extend($.fn.datagrid.defaults, {
+        loader: function(param, success, error){
+            var opts = $(this).datagrid('options');
+            if (!opts.url) return false;
+            $.ajax({
+                type: opts.method,
+                url: opts.url,
+                data: param,
+                dataType: 'json',
+                headers:{
+                    "X-LC-Id": "OAsq3BaUejlty6HR5y6LtoOA-gzGzoHsz",
+                    "X-LC-Key": "rY459mImPgBLwM4H78n3lbzI"
+                },
+                success: function(data){
+                    debugger
+                    success(data.results);
+                },
+                error: function(){
+                    error.apply(this, arguments);
+                }
+            });
+        }
+    });
+
+</script>
+
+</body>
+</html>
