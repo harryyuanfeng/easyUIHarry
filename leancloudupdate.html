@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DataGrid with Toolbar - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="extension/leancloudDatagrid.js"></script>
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+    <script src="//cdn.bootcss.com/ractive/0.7.3/ractive-legacy.min.js"></script>
+</head>
+<body>
+<h2>Leancloud update</h2>
+<script>
+    AV.initialize('OAsq3BaUejlty6HR5y6LtoOA-gzGzoHsz', 'rY459mImPgBLwM4H78n3lbzI');
+    var Post = AV.Object.extend('TODO');
+    var query = new AV.Query(Post);
+
+    // 这个 id 是要修改条目的 objectId，你在生成这个实例并成功保存时可以获取到，请看前面的文档
+    query.get('5734358171cfe40057dd670e').then(function(post) {
+        // 成功，回调中可以取得这个 Post 对象的一个实例，然后就可以修改它了
+        post.set('content', '每个 JavaScript 程序员必备的 8 个开发工具: http://buzzorange.com/techorange/2015/03/03/9-javascript-ide-editor/');
+        post.save(null,{
+            error:function(err){
+                console.log(err);
+            }
+        });
+    }, function(error) {
+
+    });
+</script>
+</body>
+</html>

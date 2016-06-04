@@ -3,34 +3,86 @@
 <head>
 	<meta charset="UTF-8">
 	<title>DataGrid with Toolbar - jQuery EasyUI Demo</title>
-	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="../demo.css">
-	<script type="text/javascript" src="../../jquery.min.js"></script>
-	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+	<script type="text/javascript" src="jquery-easyui-1.4.5/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="extension/leancloudDatagrid.js"></script>
+	<script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+	<script src="//cdn.bootcss.com/ractive/0.7.3/ractive-legacy.min.js"></script>
 </head>
 <body>
 	<h2>DataGrid with Toolbar</h2>
 	<p>Put buttons on top toolbar of DataGrid.</p>
 	<div style="margin:20px 0;"></div>
-	<table class="easyui-datagrid" title="DataGrid with Toolbar" style="width:700px;height:250px"
-			data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1.json',method:'get',toolbar:toolbar">
+	<table id="dg" title="My Users" class="easyui-datagrid" style="width:100%;height:250px"
+		   pagination="true" data-options="
+				url:'https://api.leancloud.cn/1.1/classes/xyqClass',
+				method:'get',
+				showGroup:true,
+				scrollbarSize:0,
+				toolbar:toolbar
+			"
+		   rownumbers="true" fitColumns="true" singleSelect="true">
+	<!--<table class="easyui-datagrid" title="DataGrid with Toolbar" style="width:700px;height:250px"-->
+		   <!--data-options="rownumbers:true,singleSelect:true,url:'https://api.leancloud.cn/1.1/classes/xyqClass',method:'get',toolbar:toolbar">-->
 		<thead>
-			<tr>
-				<th data-options="field:'itemid',width:80">Item ID</th>
-				<th data-options="field:'productid',width:100">Product</th>
-				<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-				<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
-				<th data-options="field:'attr1',width:240">Attribute</th>
-				<th data-options="field:'status',width:60,align:'center'">Status</th>
-			</tr>
+		<tr>
+			<th field="program" width="50">object ID</th>
+			<th field="students" width="50">students</th>
+			<th field="name" width="50">email</th>
+			<th field="containInTest" width="50">email</th>
+		</tr>
 		</thead>
 	</table>
 	<script type="text/javascript">
+		if(!window.xyqGObj){
+			window.xyqGObj = {};
+		}
+		function updateQueryStringParameter(uri, key, value) {
+			var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+			var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+			if (uri.match(re)) {
+				return uri.replace(re, '$1' + key + "=" + value + '$2');
+			}
+			else {
+				return uri + separator + key + "=" + value;
+			}
+		}
+		$.extend($.fn.datagrid.defaults, {
+			loader: function(param, success, error){
+				var opts = $(this).datagrid('options');
+				if (!opts.url) return false;
+				$.ajax({
+					type: opts.method,
+					url: opts.url,
+					data: param,
+					dataType: 'json',
+					headers:{
+						"X-LC-Id": "OAsq3BaUejlty6HR5y6LtoOA-gzGzoHsz",
+						"X-LC-Key": "rY459mImPgBLwM4H78n3lbzI"
+					},
+					success: function(data){
+						success(data.results);
+					},
+					error: function(){
+						error.apply(this, arguments);
+					}
+				});
+			}
+		});
+
 		var toolbar = [{
-			text:'Add',
+			text:'update',
 			iconCls:'icon-add',
-			handler:function(){alert('add')}
+			handler:function(){
+				var dg = $('#dg').datagrid('getSelected');
+				if(dg){
+					window.xyqGObj.updatingNews = dg;
+				}
+			}
 		},{
 			text:'Cut',
 			iconCls:'icon-cut',
